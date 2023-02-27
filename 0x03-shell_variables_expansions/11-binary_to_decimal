@@ -1,2 +1,16 @@
 #!/bin/bash
-printf "%x\n" $DECIMA
+binary=$BINARY
+decimal=0
+pos=0
+
+# loop over the binary number from righ to left
+for ((i=${#binary}-1; i>=0; i--))
+do
+	bit=${binary:$i:1} # extract the i-th bit from the right
+	if [[ $bit -eq 1 ]]; then
+		decimal=$((decimal + 2**pos)) # add the contribution of the bit to the decimal value
+	fi
+	pos=$((pos+1)) # increment the bit position
+done
+
+echo $decimal   # display the decimal value
